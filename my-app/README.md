@@ -14,6 +14,36 @@ pnpm dev
 bun dev
 ```
 
+# EVION BUILD ON AIA TESTNET
+
+CONTRACT ADDRESS 0x940187f2613bC57f4671552527e361296f20dde0
+
+[VERIFY EVO](https://testnet.aiascan.com/token/0x940187f2613bC57f4671552527e361296f20dde0)
+
+------------
+
+Discover Events with Evion
+Explore top events around the world, find events by category, and get inspired by trending events.create a logo for our website EVION
+
+
+------------
+
+Platform Overview: Evion is a dynamic online platform designed to help users discover, create, and participate in events worldwide.
+
+Event Discovery: Explore a diverse range of events, from concerts and festivals to workshops and networking opportunities, tailored to various interests and communities.
+
+User-Created Events: Empower users to create and promote their own events, allowing for personalized experiences and local engagement.
+
+Global Reach: Connect with a vibrant community of event enthusiasts across the globe, fostering connections and collaborations.
+
+Categorization: Easily navigate events by categories, such as arts, music, sports, education, and more, ensuring users find what resonates with them.
+
+Inspiration Hub: Stay inspired by trending events and unique experiences, making it easy to engage with the latest happenings.
+
+Seamless Experience: Enjoy an intuitive interface that simplifies event planning and participation, with features like RSVP management and calendar integration.
+
+Community Focus: Build a sense of belonging by connecting with like-minded individuals and sharing experiences.
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.

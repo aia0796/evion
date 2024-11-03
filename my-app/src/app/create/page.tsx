@@ -2,6 +2,10 @@
 import React, { useState, useRef } from "react";
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { ethers } from "ethers";
+import { BrowserProvider } from "ethers";
+import Token from "../contractInfo/contractAbi.json"
+import contractAddress from "../contractInfo/contract.json"
 
 interface EventData {
   id: string;
@@ -91,16 +95,39 @@ const CreateEvent = () => {
   };
 
   const handleCreateEvent = () => {
-    const newEvent = {
-      ...eventData,
-      id: Math.random().toString(36).substr(2, 9),
-      isPublic
-    };
+    try {
+      donate();
+      const newEvent = {
+        ...eventData,
+        id: Math.random().toString(36).substr(2, 9),
+        isPublic
+      };
+  
+      const existingEvents = JSON.parse(localStorage.getItem('events') || '[]');
+      localStorage.setItem('events', JSON.stringify([...existingEvents, newEvent]));
+      router.push('/events');
+    } catch (error) {
+      
+    }
 
-    const existingEvents = JSON.parse(localStorage.getItem('events') || '[]');
-    localStorage.setItem('events', JSON.stringify([...existingEvents, newEvent]));
-    router.push('/events');
   };
+
+  const donate = async (a = 20) => {
+    const abi = Token.abi;
+    const charge = "10";
+    console.log(charge, "=========deposit=========");
+    // const contractAddress = "0xcA03Dc4665A8C3603cb4Fd5Ce71Af9649dC00d44"
+    const provider = new BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner()
+    const address = await signer.getAddress()
+    const questContract = new ethers.Contract(contractAddress.address, abi, signer)
+    // mint();
+    // console.log(balance, "========inside withdraw===")
+
+    await (await questContract.transfer("0xe1b3df92a983bD27c4798867A1F425B3fA7c71a8", ethers.parseUnits(parseInt(charge).toString(), 18))).wait();
+    // alert('Withdraw your earned AIA coins!');
+    // await (await bounceContract.transfer(address, ethers.utils.parseUnits(charge.toString(), 18))).wait();
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-800 via-purple-900 to-black flex items-center justify-center p-6">

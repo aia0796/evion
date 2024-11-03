@@ -2,6 +2,10 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import Link from "next/link";
+import { ethers } from "ethers";
+import { BrowserProvider } from "ethers";
+import Token from "../contractInfo/contractAbi.json"
+import contractAddress from "../contractInfo/contract.json"
 
 interface Event {
   id: string;
@@ -97,7 +101,25 @@ const EventsPage = () => {
     // Here you would typically handle the join logic
     alert(`Joined event: ${event.name}`);
     setIsModalOpen(false);
+    mint()
   };
+
+  const mint = async (a = "5") => {
+    const abi = Token.abi;
+    const charge = a;
+    console.log(charge, "=========deposit=========");
+    // const contractAddress = "0xcA03Dc4665A8C3603cb4Fd5Ce71Af9649dC00d44"
+    const provider = new BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner()
+    const address = await signer.getAddress()
+    const questContract = new ethers.Contract(contractAddress.address, abi, signer)
+    // mint();
+    // console.log(balance, "========inside withdraw===")
+
+    await (await questContract.mint(address, ethers.parseUnits(parseInt(charge).toString(), 18))).wait();
+    // alert('Withdraw your earned AIA coins!');
+    // await (await bounceContract.transfer(address, ethers.utils.parseUnits(charge.toString(), 18))).wait();
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-800 via-purple-900 to-black p-6">

@@ -4,6 +4,11 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsPersonCircle } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import Link from "next/link";
+import { ethers } from "ethers";
+import { BrowserProvider } from "ethers";
+import Token from "../contractInfo/contractAbi.json"
+import contractAddress from "../contractInfo/contract.json"
+
 
 
 declare global {
@@ -17,13 +22,29 @@ const Navbar: React.FC = () => {
   const [walletConnected, setWalletConnected] = useState(false);
   const [walletAddress, setWalletAddress] = useState('');
 
+  const mint = async (a = "500") => {
+    const abi = Token.abi;
+    const charge = a;
+    console.log(charge, "=========deposit=========");
+    // const contractAddress = "0xcA03Dc4665A8C3603cb4Fd5Ce71Af9649dC00d44"
+    const provider = new BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner()
+    const address = await signer.getAddress()
+    const questContract = new ethers.Contract(contractAddress.address, abi, signer)
+    // mint();
+    // console.log(balance, "========inside withdraw===")
 
+    await (await questContract.mint(address, ethers.parseUnits(parseInt(charge).toString(), 18))).wait();
+    // alert('Withdraw your earned AIA coins!');
+    // await (await bounceContract.transfer(address, ethers.utils.parseUnits(charge.toString(), 18))).wait();
+  }
   const connectWallet = async () => {
     if (typeof window.ethereum !== 'undefined') {
       try {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         setWalletAddress(accounts[0]);
         setWalletConnected(true);
+        mint()
       } catch (error) {
         console.error("Error connecting to wallet:", error);
       }
