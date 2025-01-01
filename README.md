@@ -16,7 +16,7 @@ bun dev
 
 # EVION BUILD ON AIA TESTNET
 
-CONTRACT ADDRESS https://testnet.bscscan.com/token/0x7c870942957782dd3b8a6f4531790c6d8b2c5301
+CONTRACT ADDRESS : 0x7c870942957782dd3b8a6f4531790c6d8b2c5301
 
 [VERIFY EVO](https://testnet.aiascan.com/token/https://testnet.bscscan.com/token/0x7c870942957782dd3b8a6f4531790c6d8b2c5301)
 
