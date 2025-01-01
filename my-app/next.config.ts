@@ -6,6 +6,6 @@ const nextConfig: NextConfig = {
     typescript: {
       ignoreDuringBuilds: true,
     },
-};
+}
 
 export default nextConfig;
