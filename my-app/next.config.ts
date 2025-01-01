@@ -3,9 +3,11 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   eslint: {
-    typescript: {
-      ignoreDuringBuilds: true,
-    }
+    ignoreDuringBuilds: true,
+
+  },
+  typescript: {
+    ignoreDuringBuilds: true,
   }
 }
 
